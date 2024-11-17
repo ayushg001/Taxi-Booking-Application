@@ -1,4 +1,17 @@
+import java.util.ArrayList;
+
 public class Customer {
-    public static void main(String[] args) {
-        System.out.println("fs");}
+    private String customerID;
+    private String name;
+    private String phoneNumber;
+    private ArrayList bookingHistory; // List of bookings
+
+    public Customer(String customerID, String name, String phoneNumber) {
+        this.customerID = customerID;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.bookingHistory = new ArrayList<>();
+    }
+
+
 }
