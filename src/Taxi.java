@@ -8,7 +8,7 @@ public abstract class Taxi {
         this.taxiID = taxiID;
         this.driverName = driverName;
         this.location = location;
-        this.available = true;
+        this.available = true;kvh
     }
 
 
