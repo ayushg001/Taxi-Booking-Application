@@ -13,5 +13,7 @@ public class Customer {
         this.bookingHistory = new ArrayList<>();
     }
 
-
+    public String getCustomerID() {
+        return customerID;
+    }
 }
