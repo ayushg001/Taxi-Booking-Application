@@ -50,4 +50,19 @@ public class Main {
             }
         }
     }
+
+    // Register a new customer
+    private static void registerCustomer(Scanner scanner) {
+        System.out.print("Enter your name: ");
+        String name = scanner.nextLine();  //Reads the full line of input from the user
+
+        System.out.print("Enter your phone number: ");
+        String phoneNumber = scanner.nextLine();
+
+        String customerID = name + customerCounter++;
+        Customer customer = new Customer(customerID, name, phoneNumber);
+        customers.add(customer);
+
+        System.out.println("Registration successful! Your Customer ID is: " + customerID);
+    }
 }
