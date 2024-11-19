@@ -109,5 +109,89 @@ public class Main {
         System.out.println("Assigned Taxi ID: " + availableTaxi.getTaxiID());
         System.out.println("Estimated Fare: $" + booking.calculateFare());
     }
-}
+
+    // View booking history for a customer
+    private static void viewBookingHistory(Scanner scanner) {
+        System.out.print("Enter your Customer ID: ");
+        String customerID = scanner.nextLine();
+
+        Customer customer = findCustomerByID(customerID);
+        if (customer == null) {
+            System.out.println("Customer not found!");
+            return;
+        }
+
+        customer.viewBookingHistory();
+    }
+
+    // Cancel a booking
+    private static void cancelBooking(Scanner scanner) {
+        System.out.print("Enter your Customer ID: ");
+        String customerID = scanner.nextLine();
+
+        Customer customer = findCustomerByID(customerID);
+        if (customer == null) {
+            System.out.println("Customer not found!");
+            return;
+        }
+
+        System.out.print("Enter your Booking ID: ");
+        String bookingID = scanner.nextLine();
+
+        for (Booking booking : customer.getBookingHistory()) { //1 2 3
+            if (booking.getBookingID().equals(bookingID)) { //equal
+
+                booking.updateStatus("Cancelled");
+
+                System.out.println("Booking successfully cancelled.");}
+            else {
+                System.out.println("Booking not found!");
+            }
+            return;
+
+        }
+
+//        System.out.println("Booking not found!");
+    }
+
+    // View available taxis
+    private static void viewAvailableTaxis() {
+        System.out.println("Available Taxis:");
+        for (Taxi taxi : taxis) {  // Loop through each taxi in the 'taxis' list
+
+            taxi.displayTaxiDetails();
+
+        }
+    }
+
+    // Initialize taxis
+    private static void initializeTaxis() {
+        taxis.add(new StandardTaxi("TAXI1001", "Driver A", "waknaghat")); //This creates a new object of the StandardTaxi class
+        taxis.add(new StandardTaxi("TAXI1002", "Driver B", "solan"));
+        taxis.add(new PremiumTaxi("TAXI2001", "Driver C", "shimla"));
+        taxis.add(new PremiumTaxi("TAXI2002", "Driver D", "chandigarh"));
+    }
+
+    // Find customer by ID
+    private static Customer findCustomerByID(String customerID) {
+        for (Customer customer : customers) { //1 2 ...     //Loop will go through each customer in the customers list.
+            if (customer.getCustomerID().equals(customerID)) {
+                // if It finds that customer.getCustomerID() equals "akash1001", so it returns the customer object for akash.
+
+                return customer;
+            }
+        }
+        return null;  //no customer was found with that ID
+    }
+
+    // Find an available taxi by type
+    private static Taxi findAvailableTaxi(int taxiType) {
+        for (Taxi taxi : taxis) {
+            //The "instanceof" operator helps to distinguish between different subclasses of Taxi
+            if ((taxiType == 1 && taxi instanceof StandardTaxi) || (taxiType == 2 && taxi instanceof PremiumTaxi)) {
+                return taxi;
+            }
+        }
+        return null;
+    }
 }

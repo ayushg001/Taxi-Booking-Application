@@ -8,7 +8,7 @@ public abstract class Taxi {
         this.taxiID = taxiID;
         this.driverName = driverName;
         this.location = location;
-        this.available = true;
+        this.available = true; // Default to available
     }
 
     // Getter for taxi ID
@@ -17,7 +17,12 @@ public abstract class Taxi {
     }
 
 
+    // Display taxi details
+    public void displayTaxiDetails() {
+        System.out.println("Taxi ID: " + taxiID);
+        System.out.println("Driver Name: " + driverName);
+        System.out.println("Location: " + location);
+        System.out.println("Available: " + "Yes");
 
-
-
+    }
 }
