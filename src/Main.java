@@ -1,14 +1,18 @@
-import java.util.ArrayList;
+import java.util.ArrayList; //array list is dynamic array that can store objects
 import java.util.Scanner;
 
 public class Main {
     private static ArrayList<Customer> customers = new ArrayList<>(); // List of registered customers
+    //    The <Customer> part specifies that this list will store only Customer objects.
     private static ArrayList<Taxi> taxis = new ArrayList<>();         // List of all taxis
     private static int customerCounter = 1001;  // Counter to generate unique customer IDs
     private static int bookingCounter = 2001;   // Counter to generate unique booking IDs
 
     public static void main(String[] args) {
-
+        initializeTaxis(); //  By calling initializeTaxis() at the start of the main() method, we ensure that the program
+        // initializes with some sample taxi data . This early invocation means that when the user runs the program
+        // and selects options such as "Book a Taxi" or "View Available Taxis," there will already be some taxis available
+        // in the system.
         Scanner scanner = new Scanner(System.in);
         //we create a infinite while loop and set it true to initialize it
         while (true) {
@@ -23,11 +27,11 @@ public class Main {
             System.out.print("Please enter your choice: ");
 
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume the newline character
+            scanner.nextLine(); // Consume the newline character .........
 //A control structure that executes different blocks of code based on the value of choice.
             switch (choice) {
                 case 1:
-                    registerCustomer(scanner);   // will create these methods later
+                    registerCustomer(scanner);
                     break;                      //Terminates the current case and exits the switch.
                 case 2:
                     bookTaxi(scanner);
@@ -52,17 +56,58 @@ public class Main {
     }
 
     // Register a new customer
-    private static void registerCustomer(Scanner scanner) {
+    private static void registerCustomer(Scanner scanner) { // Scanner scanner is A parameter that allows the method to read user input.
         System.out.print("Enter your name: ");
-        String name = scanner.nextLine();  //Reads the full line of input from the user
+        String name = scanner.nextLine();  //Reads the full line of input (including spaces) from the user
 
         System.out.print("Enter your phone number: ");
         String phoneNumber = scanner.nextLine();
 
         String customerID = name + customerCounter++;
-        Customer customer = new Customer(customerID, name, phoneNumber);
-        customers.add(customer);
+        Customer customer = new Customer(customerID, name, phoneNumber); // parameters
+        customers.add(customer);    //The new Customer object (e.g., customer) is added to the customers arraylist.
 
         System.out.println("Registration successful! Your Customer ID is: " + customerID);
     }
+
+    // Book a taxi
+    private static void bookTaxi(Scanner scanner) {
+        System.out.print("Enter your Customer ID: ");
+        String customerID = scanner.nextLine();
+
+        Customer customer = findCustomerByID(customerID); //checking customerID is present in customer obj or not
+        if (customer == null) {
+            System.out.println("Customer not found!");
+            return;
+        }
+
+        System.out.print("Enter Pickup Location: ");
+        String pickupLocation = scanner.nextLine();
+
+        System.out.print("Enter Drop Location: ");
+        String dropLocation = scanner.nextLine();
+
+        System.out.print("Select Taxi Type (1 for Standard, 2 for Premium): ");
+        int taxiType = scanner.nextInt();
+        scanner.nextLine(); // The nextLine() method reads all the text entered by the user until they press Enter.
+
+        Taxi availableTaxi = findAvailableTaxi(taxiType);
+        if (availableTaxi == null) {
+            System.out.println("No taxis available for the selected type!");
+            return;
+        }
+
+        double distance = 22; // Generate random distance (5-20 km)
+        String bookingID = "BOOK" + bookingCounter++;
+        Booking booking = new Booking(bookingID, customer, availableTaxi, pickupLocation, dropLocation, distance);
+        customer.addBooking(booking);
+        //The new Booking object (created earlier in the code) is added to the customer's booking history (bookingHistory list).
+
+
+        System.out.println("Booking confirmed!");
+        System.out.println("Your Booking ID is: " + bookingID);
+        System.out.println("Assigned Taxi ID: " + availableTaxi.getTaxiID());
+        System.out.println("Estimated Fare: $" + booking.calculateFare());
+    }
+}
 }

@@ -11,6 +11,11 @@ public abstract class Taxi {
         this.available = true;
     }
 
+    // Getter for taxi ID
+    public String getTaxiID() {
+        return taxiID;
+    }
+
 
 
 
