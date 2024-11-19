@@ -8,6 +8,8 @@ public class Main {
     private static int customerCounter = 1001;  // Counter to generate unique customer IDs
     private static int bookingCounter = 2001;   // Counter to generate unique booking IDs
 
+    public static final String RESET = "\u001B[0m";  // Reset color
+    public static final String GREEN = "\u001B[32m"; // Green color
     public static void main(String[] args) {
         initializeTaxis(); //  By calling initializeTaxis() at the start of the main() method, we ensure that the program
         // initializes with some sample taxi data . This early invocation means that when the user runs the program
@@ -17,14 +19,14 @@ public class Main {
         //we create a infinite while loop and set it true to initialize it
         while (true) {
             // Display the menu
-            System.out.println("\nWelcome to the Taxi Booking System!"); // \n is used to create to a blank line before this statement
-            System.out.println("1. Register as a Customer");
-            System.out.println("2. Book a Taxi");
-            System.out.println("3. View Booking History");
-            System.out.println("4. Cancel a Booking");
-            System.out.println("5. View Available Taxis");
-            System.out.println("6. Exit");
-            System.out.print("Please enter your choice: ");
+            System.out.println(GREEN + "\nWelcome to the Taxi Booking System!" + RESET); // \n is used to create to a blank line before this statement
+            System.out.println(GREEN + "1. Register as a Customer" + RESET);
+            System.out.println(GREEN + "2. Book a Taxi" + RESET);
+            System.out.println(GREEN + "3. View Booking History" + RESET);
+            System.out.println(GREEN + "4. Cancel a Booking" + RESET);
+            System.out.println(GREEN + "5. View Available Taxis" + RESET);
+            System.out.println(GREEN + "6. Exit" + RESET);
+            System.out.print(GREEN + "Please enter your choice: " + RESET);
 
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume the newline character .........
