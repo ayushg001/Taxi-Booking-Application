@@ -27,10 +27,6 @@ public class Booking {
         return taxi;
     }
 
-//    // Getter for booking status
-//    public String getStatus() {
-//        return status;
-//    }
 
     // Update booking status
     public void updateStatus(String newStatus) {
@@ -39,8 +35,8 @@ public class Booking {
 
     // Method to calculate fare
     public double calculateFare() {
-        double baseFare = 5.0; // Base fare
-        double ratePerKm = (taxi instanceof PremiumTaxi) ? 15.0 : 10.0; // Premium or standard rate
+        double baseFare = 5.0;
+        double ratePerKm = (taxi instanceof PremiumTaxi) ? 15.0 : 10.0;//"instanceof" is used to check the type of the object at runtime
         return baseFare + (ratePerKm * distance);
     }
 

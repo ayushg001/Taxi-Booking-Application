@@ -107,7 +107,7 @@ public class Main {
         System.out.println("Booking confirmed!");
         System.out.println("Your Booking ID is: " + bookingID);
         System.out.println("Assigned Taxi ID: " + availableTaxi.getTaxiID());
-        System.out.println("Estimated Fare: $" + booking.calculateFare());
+        System.out.println("Estimated Fare: ₹" + booking.calculateFare());
     }
 
     // View booking history for a customer
